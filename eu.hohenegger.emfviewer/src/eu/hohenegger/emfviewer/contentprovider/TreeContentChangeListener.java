@@ -95,8 +95,9 @@ public class TreeContentChangeListener extends EContentAdapter {
 			break;
 			
 		case Notification.ADD:
-			treeViewer.refresh(notification.getNewValue());
-			treeViewer.setExpandedState(notification.getNotifier(), true);
+			//FIXME: remove commented code
+//			treeViewer.refresh(notification.getNewValue());
+//			treeViewer.setExpandedState(notification.getNotifier(), true);
 			break;
 
 		default:
