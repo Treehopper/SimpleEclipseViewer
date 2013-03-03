@@ -84,14 +84,19 @@ public class TreeContentChangeListener extends EContentAdapter {
 	public void notifyChanged(Notification notification) {
 		super.notifyChanged(notification);
 		
+		if (treeViewer == null || treeViewer.getTree().isDisposed()) {
+			return;
+		}
+		
 		int eventType = notification.getEventType();
 		switch (eventType) {
 		case Notification.SET:
+			treeViewer.refresh(notification.getNotifier());	
+			break;
+			
 		case Notification.ADD:
-			if (treeViewer != null && !treeViewer.getTree().isDisposed()) {
-				treeViewer.refresh(true);
-				treeViewer.setExpandedState(notification.getNotifier(), true);
-			}
+			treeViewer.refresh(notification.getNewValue());
+			treeViewer.setExpandedState(notification.getNotifier(), true);
 			break;
 
 		default:

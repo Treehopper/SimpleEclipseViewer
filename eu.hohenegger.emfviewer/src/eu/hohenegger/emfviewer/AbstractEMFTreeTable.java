@@ -277,7 +277,7 @@ public abstract class AbstractEMFTreeTable extends FilteredTree implements IEMFT
 	public void setInput(EReference listProperty, EObject input) {
 //		modelObservablesManager.dispose();
 		
-		IObservableList listObservable = MyEMFProperties.list(listProperty).observe(input);
+		IObservableList listObservable = EMFProperties.list(listProperty).observe(input);
 
 		modelObservablesManager.addObservable(listObservable);
 
