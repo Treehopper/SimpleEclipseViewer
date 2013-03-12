@@ -17,10 +17,12 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.e4.ui.services,
  org.eclipse.e4.ui.workbench,
  org.eclipse.e4.ui.di,
- org.eclipse.e4.ui.workbench.swt
+ org.eclipse.e4.ui.workbench.swt,
+ org.eclipse.ui.forms;bundle-version="3.5.200"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: eu.hohenegger.emfviewer,
  eu.hohenegger.emfviewer.contentprovider,
  eu.hohenegger.emfviewer.dnd,
- eu.hohenegger.emfviewer.labelprovider
+ eu.hohenegger.emfviewer.labelprovider,
+ eu.hohenegger.emfviewer.links
