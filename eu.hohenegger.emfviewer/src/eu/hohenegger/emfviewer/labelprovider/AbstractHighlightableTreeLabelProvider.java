@@ -39,14 +39,14 @@ public abstract class AbstractHighlightableTreeLabelProvider extends StyledCellL
 	}
 
 	public void setPattern(String pattern) {
-		this.pattern = pattern;
+		this.pattern = pattern.toLowerCase();
 	}
 
 	public StyledString highlight(StyledString styledString) {
 		if (pattern == null || pattern.isEmpty() || styledString == null) {
 			return styledString;
 		}
-		int indexOf = styledString.getString().indexOf(pattern);
+		int indexOf = styledString.getString().toLowerCase().indexOf(pattern);
 
 		if (indexOf != -1) {
 			styledString.setStyle(indexOf, pattern.length(), new StyledString.Styler() {
