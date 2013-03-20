@@ -10,10 +10,12 @@
 package eu.hohenegger.emfviewer;
 
 import org.eclipse.core.databinding.ObservablesManager;
+import org.eclipse.core.databinding.beans.PojoProperties;
 import org.eclipse.core.databinding.observable.IObservable;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.masterdetail.IObservableFactory;
 import org.eclipse.core.databinding.observable.set.IObservableSet;
+import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.property.value.IValueProperty;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.databinding.EMFDataBindingContext;
@@ -25,6 +27,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.ui.dnd.ViewerDragAdapter;
+import org.eclipse.jface.databinding.swt.ISWTObservableValue;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.databinding.viewers.CellEditorProperties;
 import org.eclipse.jface.databinding.viewers.ObservableListTreeContentProvider;
@@ -48,6 +51,7 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.dialogs.FilteredTree;
@@ -56,9 +60,9 @@ import eu.hohenegger.emfviewer.contentprovider.AbstractEMFContentProvider;
 import eu.hohenegger.emfviewer.contentprovider.TreeContentChangeListener;
 import eu.hohenegger.emfviewer.dnd.IDragSupport;
 import eu.hohenegger.emfviewer.dnd.IDropSupport;
+import eu.hohenegger.emfviewer.labelprovider.AbstractHighlightableTreeLabelProvider;
 import eu.hohenegger.emfviewer.labelprovider.EMFHighlightableTreeLabelProvider;
 import eu.hohenegger.emfviewer.labelprovider.HighlightableDecoratedCellLabelProvider;
-import eu.hohenegger.emfviewer.labelprovider.AbstractHighlightableTreeLabelProvider;
 import eu.hohenegger.emfviewer.labelprovider.TreeLabelDecorator;
 import eu.hohenegger.emfviewer.tree.EMFTreePatternFilter;
 
@@ -71,24 +75,43 @@ public abstract class AbstractEMFTreeTable extends FilteredTree implements IEMFT
 	private final EMFDataBindingContext dataBindingContext = new EMFDataBindingContext();
 	private ObservableListTreeContentProvider contentProvider;
 	private EObject containmentRoot;
-
+	
+	private EMFDataBindingContext ctx = new EMFDataBindingContext();
 
 	private TreeContentChangeListener treeContentChangeListener;
 	private HighlightableDecoratedCellLabelProvider highlightableDecoratedCellLabelProvider;
 
+	
+	private class PatternDelegator {
+		private String pattern;
+
+		public String getPattern() {
+			return pattern;
+		}
+
+		public void setPattern(final String pattern) {
+			this.pattern = pattern;
+			
+			Display.getCurrent().syncExec(new Runnable() {
+				@Override
+				public void run() {
+					getPatternFilter().setPattern(pattern);
+					highlightableDecoratedCellLabelProvider.setPattern(pattern);
+			
+					getViewer().refresh();
+				}
+			});
+		}
+	}
+	
 	public AbstractEMFTreeTable(Composite parent, int style, EditingDomain editingDomain) {
 		super(parent, style, new EMFTreePatternFilter(), true);
 
 		getPatternFilter().setIncludeLeadingWildcard(true);
 		
-		getFilterControl().addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent e) {
-				String text = ((Text) e.widget).getText();
-				getPatternFilter().setPattern(text);
-				highlightableDecoratedCellLabelProvider.setPattern(text);
-				getViewer().refresh();
-			}
-		});
+		ISWTObservableValue observableValue = WidgetProperties.text(SWT.Modify).observeDelayed(300, getFilterControl());
+		IObservableValue observableValue2 = PojoProperties.value("pattern").observe(new PatternDelegator());
+		ctx.bindValue(observableValue, observableValue2);
 
 		this.editingDomain = editingDomain;
 
@@ -277,7 +300,7 @@ public abstract class AbstractEMFTreeTable extends FilteredTree implements IEMFT
 	public void setInput(EReference listProperty, EObject input) {
 //		modelObservablesManager.dispose();
 		
-		IObservableList listObservable = EMFProperties.list(listProperty).observe(input);
+		IObservableList listObservable = MyEMFProperties.list(listProperty).observe(input);
 
 		modelObservablesManager.addObservable(listObservable);
 
