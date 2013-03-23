@@ -12,6 +12,7 @@ package eu.hohenegger.emfviewer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 
 import eu.hohenegger.emfviewer.dnd.EMFDropSupport;
@@ -24,7 +25,7 @@ public class EMFContainmentTreeTable extends AbstractEMFTreeTable {
 	private IDropSupport dropSupport;
 
 	public EMFContainmentTreeTable(Composite parent, int style, EditingDomain editingDomain) {
-		super(parent, style, editingDomain);
+		super(parent, style | SWT.FULL_SELECTION, editingDomain);
 	}
 
 	protected EReference getChildFeature(EObject eObject) {

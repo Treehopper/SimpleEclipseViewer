@@ -106,6 +106,8 @@ public abstract class AbstractEMFTreeTable extends FilteredTree implements IEMFT
 	
 	public AbstractEMFTreeTable(Composite parent, int style, EditingDomain editingDomain) {
 		super(parent, style, new EMFTreePatternFilter(), true);
+		
+		getViewer().setUseHashlookup(true); //This should be the default in a scalable filtered tree.
 
 		getPatternFilter().setIncludeLeadingWildcard(true);
 		
