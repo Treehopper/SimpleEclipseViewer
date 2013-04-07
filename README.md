@@ -9,6 +9,10 @@ JFaces TreeViewer, TableViewer and TreeTable are powerful controls, but for crea
 the API makes you jump through hoops. Especially if you want to use such features in combination.
 SimpleEclipseViewer tries to fix this.
 
+Download from p2 update site
+===================
+http://p2.hohenegger.eu/eu.hohenegger.emfviewer
+
 License
 ===================
 Eclipse Public License v1.0 which accompanies this distribution, and is available at  http://www.eclipse.org/legal/epl-v10.html
