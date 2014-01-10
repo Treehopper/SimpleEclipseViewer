@@ -1,3 +1,5 @@
+![Travis CI](https://travis-ci.org/Treehopper/SimpleEclipseViewer.png?branch=master "Build Status")
+
 SimpleEclipseViewer
 ===================
 
