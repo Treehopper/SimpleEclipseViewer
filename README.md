@@ -1,5 +1,3 @@
-![Travis CI](https://travis-ci.org/Treehopper/SimpleEclipseViewer.png?branch=master "Build Status")
-
 SimpleEclipseViewer
 ===================
 
@@ -14,6 +12,10 @@ SimpleEclipseViewer tries to fix this.
 Install from p2 update site
 ===================
 http://p2.hohenegger.eu/eu.hohenegger.emfviewer
+
+Build Status
+===================
+![Travis CI](https://travis-ci.org/Treehopper/SimpleEclipseViewer.png?branch=master "Build Status")
 
 License
 ===================
