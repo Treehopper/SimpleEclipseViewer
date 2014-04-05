@@ -10,6 +10,7 @@
 		<module>eu.hohenegger.emfviewer</module>
 		<module>eu.hohenegger.emfviewer.feature</module>
 		<module>eu.hohenegger.emfviewer.p2udpatesite</module>
+		<module>eu.hohenegger.emfviewer.targetplatform</module>
 	</modules>
 
 	<properties>
@@ -17,17 +18,24 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
-	<!-- add Juno repository to resolve dependencies -->
-	<repositories>
-		<repository>
-			<id>juno</id>
-			<layout>p2</layout>
-			<url>http://download.eclipse.org/releases/juno</url>
-		</repository>
-	</repositories>
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<target>
+						<artifact>
+							<groupId>eu.hohenegger.emfviewer</groupId>
+							<artifactId>eu.hohenegger.emfviewer.targetplatform</artifactId>
+							<version>0.0.1-SNAPSHOT</version>
+						</artifact>
+					</target>
+				</configuration>
+			</plugin>
+
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-maven-plugin</artifactId>
