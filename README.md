@@ -11,7 +11,7 @@ SimpleEclipseViewer tries to fix this.
 
 Install from p2 update site
 ===================
-http://p2.hohenegger.eu/eu.hohenegger.emfviewer
+http://treehopper.github.io/SimpleEclipseViewer/
 
 
 License
