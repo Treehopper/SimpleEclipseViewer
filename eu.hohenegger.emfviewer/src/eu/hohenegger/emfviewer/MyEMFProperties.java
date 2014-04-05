@@ -19,6 +19,10 @@ import org.eclipse.emf.databinding.internal.EMFListPropertyDecorator;
 import org.eclipse.emf.databinding.internal.EMFObservableListDecorator;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+/**
+ * Databinding Bug: http://www.eclipse.org/forums/index.php/m/1015853/?srch=hohenegger#msg_1015853
+ */
+@SuppressWarnings("restriction")
 public class MyEMFProperties extends EMFProperties {
 	public static IEMFListProperty list(final EStructuralFeature feature) {
 		final IListProperty property;
