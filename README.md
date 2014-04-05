@@ -1,4 +1,4 @@
-SimpleEclipseViewer
+SimpleEclipseViewer ![Travis CI](https://travis-ci.org/Treehopper/SimpleEclipseViewer.png?branch=master "Build Status")
 ===================
 
 JFaces TreeViewer, TableViewer and TreeTable are powerful controls, but for creating a viewer with advanced features such as:
@@ -13,9 +13,6 @@ Install from p2 update site
 ===================
 http://p2.hohenegger.eu/eu.hohenegger.emfviewer
 
-Build Status
-===================
-![Travis CI](https://travis-ci.org/Treehopper/SimpleEclipseViewer.png?branch=master "Build Status")
 
 License
 ===================
