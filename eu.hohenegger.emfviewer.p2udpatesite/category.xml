@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/eu.hohenegger.emfviewer.feature_1.0.0.qualifier.jar" id="eu.hohenegger.emfviewer.feature" version="1.0.0.qualifier">
+   <feature id="eu.hohenegger.emfviewer.feature" version="0.0.0">
       <category name="eu.hohenegger.emfviewer"/>
    </feature>
    <category-def name="eu.hohenegger.emfviewer" label="EMFViewer"/>
